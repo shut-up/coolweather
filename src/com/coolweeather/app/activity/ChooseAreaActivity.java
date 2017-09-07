@@ -102,8 +102,6 @@ public class ChooseAreaActivity extends Activity{
 			dataList.clear();
 			for(Province province : provinceList){
 				dataList.add(province.getProvinceName());
-				System.out.println("ProvinceCode=========="+province.getProvinceCode());
-				System.out.println("provinceName=========="+province.getProvinceName());
 			}
 			adapter.notifyDataSetChanged();
 			listView.setSelection(0);
@@ -123,11 +121,9 @@ public class ChooseAreaActivity extends Activity{
 			dataList.clear();
 			for(City city : cityList){
 				dataList.add(city.getCityName());
-//				System.out.println("cityName======="+city.getCityName());
 			}
 			adapter.notifyDataSetChanged();
 			listView.setSelection(0);
-			System.out.println("selectedProvince.getProvinceName()+++++++++"+selectedProvince.getProvinceName());
 			titleText.setText(selectedProvince.getProvinceName());
 			currentLevel = LEVEL_CITY;
 		}else {
@@ -170,7 +166,6 @@ public class ChooseAreaActivity extends Activity{
 			
 			@Override
 			public void onFinish(String response) {
-				System.out.println("type+++++++++"+type);
 				boolean result = false;
 				if("province".equals(type)){
 					result = Utility.handleProvincesResponse(coolWeatherDB, response);

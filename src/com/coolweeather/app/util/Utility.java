@@ -14,14 +14,11 @@ public class Utility {
 	 */
 	public synchronized static boolean handleProvincesResponse(CoolWeatherDB coolWeatherDB,String  response){
 		if(!TextUtils.isEmpty(response)){
-			System.out.println("response================"+response);
 			String[] allProvinces = response.split(",");
 			if(allProvinces!=null && allProvinces.length>0){
 				for(String p:allProvinces){
 					String[] array = p.split("\\|");
 					Province province = new Province();
-					System.out.println("array[0]++++++"+array[0]);
-					System.out.println("array[1]++++++"+array[1]);
 					province.setProvinceCode(array[0]);
 					province.setProvinceName(array[1]);
 					//将解析出来的数据存储到Province表中

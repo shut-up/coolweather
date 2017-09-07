@@ -91,10 +91,8 @@ public class CoolWeatherDB {
 	 * 从数据库获取某省下所有的城市信息
 	 */
 	public List<City> loadCities(int provinceId){
-		System.out.println("(In Db)provinceId++++++++++"+provinceId);
 		List<City> list = new ArrayList<City>();
 		Cursor cursor = db.query("City", null, "province_id = ?", new String[]{String.valueOf(provinceId)}, null, null, null);
-		System.out.println("cursor.moveToFirst()++++"+cursor.moveToFirst());
 		if(cursor.moveToFirst()){
 			do {
 				City city = new City(); 
@@ -102,7 +100,6 @@ public class CoolWeatherDB {
 				city.setCityName(cursor.getString(cursor.getColumnIndex("city_name")));
 				city.setCityCode(cursor.getString(cursor.getColumnIndex("city_code")));
 				city.setProvinceId(provinceId);
-				System.out.println("cursor.getString(cursor.getColumnIndex())+++++++++++"+cursor.getString(cursor.getColumnIndex("city_name")));
 				list.add(city);
 			} while (cursor.moveToNext());
 		}
