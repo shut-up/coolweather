@@ -1,22 +1,25 @@
-package com.coolweeather.app.activity;
+package com.coolweather.app.activity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.coolweather.app.db.CoolWeatherDB;
+import com.coolweather.app.model.City;
+import com.coolweather.app.model.Country;
+import com.coolweather.app.model.Province;
+import com.coolweather.app.util.HttpCallbackListener;
+import com.coolweather.app.util.HttpUtil;
+import com.coolweather.app.util.Utility;
 import com.coolweeather.app.R;
-import com.coolweeather.app.db.CoolWeatherDB;
-import com.coolweeather.app.model.City;
-import com.coolweeather.app.model.Country;
-import com.coolweeather.app.model.Province;
-import com.coolweeather.app.util.HttpCallbackListener;
-import com.coolweeather.app.util.HttpUtil;
-import com.coolweeather.app.util.Utility;
 
 import android.R.string;
 import android.app.Activity;
 import android.app.DownloadManager.Request;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -69,6 +72,15 @@ public class ChooseAreaActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		if(prefs.getBoolean("city_selected", false)){
+			Intent intent = new Intent(this, WeatherActivity.class);
+			startActivity(intent);
+			finish();
+			return;
+		}
+		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.choose_area);
 		listView = (ListView) findViewById(R.id.list_view);
@@ -86,6 +98,12 @@ public class ChooseAreaActivity extends Activity{
 				}else if(currentLevel == LEVEL_CITY){
 					selectedCity = cityList.get(position);
 					queryCountries();
+				}else if(currentLevel == LEVEL_COUNTRY){
+					String countryCode = countryList.get(position).getCountryCode();
+					Intent intent = new Intent(ChooseAreaActivity.this, WeatherActivity.class);
+					intent.putExtra("country_code", countryCode);
+					startActivity(intent);
+					finish();
 				}
 			}
 			
