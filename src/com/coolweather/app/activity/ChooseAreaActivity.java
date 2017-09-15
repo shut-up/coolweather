@@ -3,6 +3,7 @@ package com.coolweather.app.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.coolweather.app.R;
 import com.coolweather.app.db.CoolWeatherDB;
 import com.coolweather.app.model.City;
 import com.coolweather.app.model.Country;
@@ -10,7 +11,6 @@ import com.coolweather.app.model.Province;
 import com.coolweather.app.util.HttpCallbackListener;
 import com.coolweather.app.util.HttpUtil;
 import com.coolweather.app.util.Utility;
-import com.coolweeather.app.R;
 
 import android.R.string;
 import android.app.Activity;
