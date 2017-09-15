@@ -33,7 +33,7 @@ public class HttpUtil {
 					}
 				} catch (Exception e) {
 					if(listener != null){
-						//回调onErroe()方法
+						//回调onError()方法
 						listener.onError(e);
 					}
 				}finally {
